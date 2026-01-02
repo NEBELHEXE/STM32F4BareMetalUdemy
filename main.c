@@ -1,25 +1,21 @@
+#include <stdio.h>
+#include <stdint.h>
 #include "stm32f4xx.h"
 #include "uart.h"
+#include "adc.h"
 
+uint32_t sensor_value;
+int main(void) {
 
+	uart2_rxtx_init();
+	pa1_adc_init();
 
-
-int main(void)
-{
-
-
-	uar2_tx_init();
-
-	while(1)
+	while (1)
 	{
-		printf("Hello from STM32F4........\n\r");
+		start_conversion();
+
+		sensor_value = adc_read();
+		printf("Sensor value: %d \n\r",(int)sensor_value);
 	}
 
 }
-
-
-
-
-
-
-
